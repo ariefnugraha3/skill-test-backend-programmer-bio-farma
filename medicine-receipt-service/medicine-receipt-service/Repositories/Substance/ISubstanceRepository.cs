@@ -7,5 +7,8 @@ namespace medicine_receipt_service.Repositories.Substance
     {
         public Task<SubstancesEntity?> GetSingleAsync(long id);
         public Task<List<SubstancesEntity>> GetMany(Expression<Func<SubstancesEntity, bool>> predicate);
+        public Task<SubstancesEntity> Add(SubstancesEntity entity);
+        public Task<SubstancesEntity> Update(SubstancesEntity entity);
+        public Task<SubstancesEntity> Delete(SubstancesEntity entity);
     }
 }

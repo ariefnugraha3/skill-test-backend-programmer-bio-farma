@@ -16,7 +16,5 @@ namespace medicine_receipt_service.Contexts.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Column("update_date", TypeName = "timestamp with time zone")]
         public DateTime UpdateDate { get; set; }
-
-        public DateTime? DeletedDate { get; set; } = null;
     }
 }

@@ -13,6 +13,34 @@ namespace medicine_receipt_service.Repositories.Receipt
             _dbContext = dbContext;
         }
 
+        public async Task<ReceiptsEntity> Add(ReceiptsEntity entity)
+        {
+            try
+            {
+                var result = await _dbContext.ReceiptsEntities.AddAsync(entity);
+                return result.Entity;
+            }
+            catch (Exception ex)
+            {
+                //TODO : log ex
+                throw;
+            }
+        }
+
+        public async Task<ReceiptsEntity> Delete(ReceiptsEntity entity)
+        {
+            try
+            {
+                var result = _dbContext.ReceiptsEntities.Remove(entity);
+                return result.Entity;
+            }
+            catch (Exception ex)
+            {
+                //TODO : log ex
+                throw;
+            }
+        }
+
         public async Task<List<ReceiptsEntity>> GetListAsync()
         {
             try
@@ -31,6 +59,20 @@ namespace medicine_receipt_service.Repositories.Receipt
             try
             {
                 return await _dbContext.ReceiptsEntities.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                //TODO : log ex
+                throw;
+            }
+        }
+
+        public async Task<ReceiptsEntity> Update(ReceiptsEntity entity)
+        {
+            try
+            {
+                var result = _dbContext.ReceiptsEntities.Update(entity);
+                return result.Entity;
             }
             catch (Exception ex)
             {
