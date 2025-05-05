@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Command\" />
     <Folder Include="Repositories\SubstanceForProduction\" />
     <Folder Include="Repositories\Substance\" />
     <Folder Include="Repositories\User\" />
