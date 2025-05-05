@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using medicine_receipt_service.Contexts;
@@ -11,9 +12,11 @@ using medicine_receipt_service.Contexts;
 namespace medicine_receipt_service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505140939_RenameTable")]
+    partial class RenameTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +91,7 @@ namespace medicine_receipt_service.Migrations
                     b.Property<long>("PrevStepId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ProductionStepDetailId")
+                    b.Property<long>("ProductionStepId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("ReceiptId")
@@ -104,11 +107,11 @@ namespace medicine_receipt_service.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductionStepDetailId");
+                    b.HasIndex("ProductionStepId");
 
                     b.HasIndex("SubstanceId");
 
-                    b.HasIndex("ReceiptId", "SubstanceId", "ProductionStepDetailId")
+                    b.HasIndex("ReceiptId", "SubstanceId", "ProductionStepId")
                         .IsUnique();
 
                     b.ToTable("production_steps", (string)null);
@@ -226,7 +229,7 @@ namespace medicine_receipt_service.Migrations
                 {
                     b.HasOne("medicine_receipt_service.Contexts.Entities.ProductionStepDetailEntity", "ProductionStepDetailEntity")
                         .WithMany("SubstancesForProductions")
-                        .HasForeignKey("ProductionStepDetailId")
+                        .HasForeignKey("ProductionStepId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

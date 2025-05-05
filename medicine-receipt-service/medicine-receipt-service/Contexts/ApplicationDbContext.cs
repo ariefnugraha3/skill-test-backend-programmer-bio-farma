@@ -8,18 +8,18 @@ namespace medicine_receipt_service.Contexts
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
-        public DbSet<ProductionStepsEntity> ProductionStepsEntities => Set<ProductionStepsEntity>();
+        public DbSet<ProductionStepDetailEntity> ProductionStepDetailsEntities => Set<ProductionStepDetailEntity>();
         public DbSet<ReceiptsEntity> ReceiptsEntities => Set<ReceiptsEntity>();
         public DbSet<SubstancesEntity> SubstancesEntities => Set<SubstancesEntity>();
-        public DbSet<SubstancesForProductionEntity> SubstancesForProductionEntities => Set<SubstancesForProductionEntity>();
+        public DbSet<ProductionStepsEntity> ProductionStepsEntities => Set<ProductionStepsEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SubstancesForProductionEntity>(substanceForProduction =>
+            modelBuilder.Entity<ProductionStepsEntity>(substanceForProduction =>
             {
-                substanceForProduction.ToTable("substance_for_productions");
+                substanceForProduction.ToTable("production_steps");
 
                 //relation to Receipt
                 substanceForProduction.HasOne(data => data.ReceiptsEntity)
@@ -34,18 +34,18 @@ namespace medicine_receipt_service.Contexts
                 .OnDelete(DeleteBehavior.Cascade);
 
                 //relation to ProductionStep
-                substanceForProduction.HasOne(data => data.ProductionStepsEntity)
+                substanceForProduction.HasOne(data => data.ProductionStepDetailEntity)
                 .WithMany(step => step.SubstancesForProductions)
-                .HasForeignKey(data => data.ProductionStepId)
+                .HasForeignKey(data => data.ProductionStepDetailId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-                substanceForProduction.HasIndex(data => new { data.ReceiptId, data.SubstanceId, data.ProductionStepId })
+                substanceForProduction.HasIndex(data => new { data.ReceiptId, data.SubstanceId, data.ProductionStepDetailId })
                 .IsUnique();
             });
 
-            modelBuilder.Entity<ProductionStepsEntity>(productionSteps =>
+            modelBuilder.Entity<ProductionStepDetailEntity>(productionSteps =>
             {
-                productionSteps.ToTable("production_steps");
+                productionSteps.ToTable("production_step_details");
 
                 productionSteps.Property(data => data.Name)
                 .HasMaxLength(100);

@@ -2,12 +2,16 @@
 {
     public class ProductionStepsEntity : BaseEntity
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public float Duration { get; set; }
-        public float Temperature { get; set; }
-        public float Pressure { get; set; }
+        public long ReceiptId { get; set; }
+        public ReceiptsEntity ReceiptsEntity { get; set; }
 
-        public ICollection<SubstancesForProductionEntity> SubstancesForProductions { get; set; }
+        public long SubstanceId { get; set; }
+        public SubstancesEntity SubstancesEntity { get; set; }
+
+        public long ProductionStepDetailId { get; set; }
+        public ProductionStepDetailEntity ProductionStepDetailEntity { get; set; }
+
+        public long NextStepId { get; set; }
+        public long PrevStepId { get; set; }
     }
 }

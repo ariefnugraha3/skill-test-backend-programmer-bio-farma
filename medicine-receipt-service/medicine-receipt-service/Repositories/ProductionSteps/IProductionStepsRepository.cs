@@ -1,6 +1,10 @@
-﻿namespace medicine_receipt_service.Repositories.ProductionSteps
+﻿using medicine_receipt_service.Contexts.Entities;
+
+namespace medicine_receipt_service.Repositories.SubstanceForProduction
 {
-    public class IProductionStepsRepository
+    public interface IProductionStepsRepository
     {
+        public Task<List<ProductionStepsEntity>> GetListByReceiptIdAsync(long receiptId);
+        public Task<ProductionStepsEntity?> GetSingleAsync(long id);
     }
 }

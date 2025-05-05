@@ -1,5 +1,9 @@
 using medicine_receipt_service.Contexts;
+using medicine_receipt_service.Repositories.ProductionSteps;
 using medicine_receipt_service.Repositories.Receipt;
+using medicine_receipt_service.Repositories.Substance;
+using medicine_receipt_service.Repositories.SubstanceForProduction;
+using medicine_receipt_service.Services.ProductionSteps;
 using medicine_receipt_service.Services.Receipt;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +21,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 
 //repository
 builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+builder.Services.AddScoped<IProductionStepDetailsRepository, ProductionStepDetailsRepository>();
+builder.Services.AddScoped<IProductionStepsRepository, ProductionStepsRepository>();
+builder.Services.AddScoped<ISubstanceRepository, SubstanceRepository>();
+
 builder.Services.AddScoped<IReceiptService, ReceiptService>();
 
 var app = builder.Build();
