@@ -1,6 +1,6 @@
 ﻿using medicine_receipt_service.Enums;
 
-namespace medicine_receipt_service.Domain.Entities
+namespace medicine_receipt_service.Contexts.Entities
 {
     public class UsersEntity : BaseEntity
     {

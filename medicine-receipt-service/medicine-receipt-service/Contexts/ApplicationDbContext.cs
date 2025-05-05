@@ -1,7 +1,7 @@
-﻿using medicine_receipt_service.Domain.Entities;
+﻿using medicine_receipt_service.Contexts.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace medicine_receipt_service.Persistence
+namespace medicine_receipt_service.Contexts
 {
     public class ApplicationDbContext : DbContext
     {
@@ -19,14 +19,7 @@ namespace medicine_receipt_service.Persistence
 
             modelBuilder.Entity<SubstancesForProductionEntity>(substanceForProduction =>
             {
-                substanceForProduction.HasKey(data => data.Id);
-                substanceForProduction.Property(data => data.CreateDate)
-                .HasColumnType("timestamp without time zone")
-                .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAdd();
-                substanceForProduction.Property(data => data.UpdateDate)
-                .HasColumnType("timestamp without time zone")
-                .ValueGeneratedOnAddOrUpdate();
+                substanceForProduction.ToTable("substance_for_productions");
 
                 //relation to Receipt
                 substanceForProduction.HasOne(data => data.ReceiptsEntity)
@@ -52,62 +45,34 @@ namespace medicine_receipt_service.Persistence
 
             modelBuilder.Entity<ProductionStepsEntity>(productionSteps =>
             {
+                productionSteps.ToTable("production_steps");
+
                 productionSteps.Property(data => data.Name)
                 .HasMaxLength(100);
-
-                productionSteps.Property(data => data.CreateDate)
-                .HasColumnType("timestamp without time zone")
-                .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAdd();
-
-                productionSteps.Property(data => data.UpdateDate)
-                .HasColumnType("timestamp without time zone")
-                .ValueGeneratedOnAddOrUpdate();
             });
 
             modelBuilder.Entity<ReceiptsEntity>(receipts =>
             {
+                receipts.ToTable("receipts");
+
                 receipts.Property(data => data.Name)
                 .HasMaxLength(100);
-
-                receipts.Property(data => data.CreateDate)
-                .HasColumnType("timestamp without time zone")
-                .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAdd();
-
-                receipts.Property(data => data.UpdateDate)
-                .HasColumnType("timestamp without time zone")
-                .ValueGeneratedOnAddOrUpdate();
             });
 
             modelBuilder.Entity<SubstancesEntity>(substances =>
             {
+                substances.ToTable("substances");
+
                 substances.Property(data => data.Name)
                 .HasMaxLength(100);
-
-                substances.Property(x => x.CreateDate)
-                .HasColumnType("timestamp without time zone")
-                .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAdd();
-
-                substances.Property(x => x.UpdateDate)
-                .HasColumnType("timestamp without time zone")
-                .ValueGeneratedOnAddOrUpdate();
             });
 
             modelBuilder.Entity<UsersEntity>(users =>
             {
+                users.ToTable("users");
+
                 users.Property(data => data.Username)
                 .HasMaxLength(20);
-
-                users.Property(data => data.CreateDate)
-                .HasColumnType("timestamp without time zone")
-                .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAdd();
-
-                users.Property(data => data.UpdateDate)
-                .HasColumnType("timestamp without time zone")
-                .ValueGeneratedOnAddOrUpdate();
             });
 
 

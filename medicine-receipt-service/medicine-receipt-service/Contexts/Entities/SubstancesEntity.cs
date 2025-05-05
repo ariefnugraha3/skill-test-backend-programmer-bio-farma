@@ -1,6 +1,6 @@
-﻿namespace medicine_receipt_service.Domain.Entities
+﻿namespace medicine_receipt_service.Contexts.Entities
 {
-    public class ReceiptsEntity : BaseEntity
+    public class SubstancesEntity : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }

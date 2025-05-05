@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using medicine_receipt_service.Contexts;
@@ -11,9 +12,11 @@ using medicine_receipt_service.Contexts;
 namespace medicine_receipt_service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505120729_FixIdTypeAndTimeStamps")]
+    partial class FixIdTypeAndTimeStamps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace medicine_receipt_service.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("production_steps", (string)null);
+                    b.ToTable("ProductionStepsEntities");
                 });
 
             modelBuilder.Entity("medicine_receipt_service.Contexts.Entities.ReceiptsEntity", b =>
@@ -98,7 +101,7 @@ namespace medicine_receipt_service.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("receipts", (string)null);
+                    b.ToTable("ReceiptsEntities");
                 });
 
             modelBuilder.Entity("medicine_receipt_service.Contexts.Entities.SubstancesEntity", b =>
@@ -133,7 +136,7 @@ namespace medicine_receipt_service.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("substances", (string)null);
+                    b.ToTable("SubstancesEntities");
                 });
 
             modelBuilder.Entity("medicine_receipt_service.Contexts.Entities.SubstancesForProductionEntity", b =>
@@ -181,7 +184,7 @@ namespace medicine_receipt_service.Migrations
                     b.HasIndex("ReceiptId", "SubstanceId", "ProductionStepId")
                         .IsUnique();
 
-                    b.ToTable("substance_for_productions", (string)null);
+                    b.ToTable("SubstancesForProductionEntities");
                 });
 
             modelBuilder.Entity("medicine_receipt_service.Contexts.Entities.UsersEntity", b =>
@@ -219,7 +222,7 @@ namespace medicine_receipt_service.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users", (string)null);
+                    b.ToTable("UsersEntity");
                 });
 
             modelBuilder.Entity("medicine_receipt_service.Contexts.Entities.SubstancesForProductionEntity", b =>

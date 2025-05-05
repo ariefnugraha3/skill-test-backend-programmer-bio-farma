@@ -22,8 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contexts\" />
-    <Folder Include="Models\" />
+    <Folder Include="Repositories\SubstanceForProduction\" />
+    <Folder Include="Repositories\Substance\" />
+    <Folder Include="Repositories\User\" />
+    <Folder Include="Services\User\" />
+    <Folder Include="Services\SubstanceForProduction\" />
+    <Folder Include="Services\Substance\" />
   </ItemGroup>
 
 </Project>

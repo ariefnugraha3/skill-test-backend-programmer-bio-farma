@@ -1,4 +1,4 @@
-using medicine_receipt_service.Persistence;
+using medicine_receipt_service.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
