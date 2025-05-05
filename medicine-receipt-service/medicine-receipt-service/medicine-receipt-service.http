@@ -1,0 +1,6 @@
+@medicine_receipt_service_HostAddress = http://localhost:5009
+
+GET {{medicine_receipt_service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
