@@ -1,16 +1,14 @@
 # Tes kemampuan teknis sebagai Backend programmer Bio Farma oleh - Arief Nugraha -
 
+*Readme ini telah diedit untuk menyesuaikan dengan hasil program yang telah dikerjakan, jika ingin melihat desain/rancangan awal bisa dilihat di history commit*
+
 ## Asumsi alur proses bisnis sistem :
-1. Terdapat user dengan role *super admin* untuk mengelola data user.
-2. User bisa menambah, mengedit, dan menghapus data obat.
-3. User bisa menambah, mengedit, dan menghapus data bahan untuk membuat obat.
-4. User bisa menambah, mengedit, dan menghapus data langkah pembuatan obat.
-5. 1 obat bisa menggunakan bahan yang sama untuk membuat obat lainnya.
-6. 1 obat bisa menggunakan satu atau lebih langkah yang sama untuk membuat obat lainnya.
-7. 1 bahan bisa digunakan untuk membuat berbagai obat.
+1. 1 obat bisa menggunakan bahan yang sama untuk membuat obat lainnya.
+2. 1 obat bisa menggunakan satu atau lebih langkah yang sama untuk membuat obat lainnya.
+3. 1 bahan bisa digunakan untuk membuat berbagai obat.
 
 ## ERD :
-![tech-test-biofarma (1)](https://github.com/user-attachments/assets/8c79e341-8fa0-4f3e-ac6e-652f8f9a7e86)
+![tech-test-biofarma](https://github.com/user-attachments/assets/52213ecf-db75-4019-b923-4913de84967f)
 
 Deskripsi tabel :
 1. users
@@ -22,10 +20,10 @@ Deskripsi tabel :
 3. substances
   - Daftar bahan-bahan yang dibutuhkan untuk membuat obat
   - setiap bahan bisa dipakai oleh banyak obat dan langkah pembuatan
-4. production_steps
-  - Daftar langkah-langkah pembuatan obat
+4. production_step_details
+  - Daftar detail dari langkah-langkah pembuatan obat
   - setiap langkah pembuatan obat bisa menggunakan banyak bahan yang sama
-5. substance_for_production
+5. production_steps
   - Sebagai tabel transaksi untuk menghubungkan resep obat, bahan, dan langkah pembuatan
   - Terdapat *next_step_id* untuk menyimpan langkah selanjutnya
   - Terdapat *prev_step_id* untuk menyimpan langkah sebelumnya
@@ -33,22 +31,24 @@ Deskripsi tabel :
 Setiap tabel memiliki data :
   - *create_date* untuk menyimpan kapan data ini dibuat
   - *update_date* untuk menyimpan kapan data ini diperbarui
-  - *delete_date* untuk menyimpan kapan data ini dihapus (default = null)
 
 ## List API :
-1. [POST] /login
-2. [POST] /user
-3. [GET] /user/{id}
-4. [GET] /user/list
-5. [PUT] /user/{id}
-6. [DELETE] /user/{id}
-7. [POST] /receipt
-8. [GET] /receipt/{id}
-9. [GET] /receipt/list
-10. [PUT] /receipt/{id}
-11. [DELETE] /receipt/{id}
-12. [POST] /substance
-13. [GET] /substance/{id}
-14. [GET] /substance/list
-15. [PUT] /substance/{id}
-16. [DELETE] /substance/{id}
+1. [GET] /receipt
+   - untuk melihat daftar resep obat
+   - Request Payload : -
+   - Response :
+       - ![Screenshot 2025-05-06 204059](https://github.com/user-attachments/assets/47db5f10-b9c3-4775-a01e-868f099fbb5c)
+
+2. [GET] /receipt/{id}
+  - untuk melihat detail langkah pembuatan dan bahan yang digunakan untuk membuat obat
+  - Request payload : receipt Id from route
+  - Response :
+      - ![Screenshot 2025-05-06 204059](https://github.com/user-attachments/assets/02b983ee-acc7-4533-8db1-2896bf37b01f)
+
+---
+#Cara menjalankan service
+1. Buka medicine-receipt-service.sln
+2. pastikan postgreSQL telah berjalan
+3. pastikan telah mengisi data dalam database
+4. Run ![image](https://github.com/user-attachments/assets/b72622fe-f6e0-4d55-b195-1d9d62072238)
+
